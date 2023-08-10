@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="information">
+ 
+    <!-- 테마에 해당되는 사진 가져오기 -->
+   <!-- mybatis에서 string은 알리아스로 제공하기에 parameterType="string"으로 써주면됨 -->
+   <select id="chooseinfo_theme" parameterType="string" resultType="information.dto.InformationDTO">
+     
+     SELECT p.pic_name, i.info_title, info_content, info_date, info_address, entrance_fee, 
+     serviced_time, closed_day, info_tel, info_homepage 
+     FROM picture p, information i
+     WHERE p.info_title = i.info_title  
+      AND i.info_title = #{info_title}
+       AND p.pic_name like '%_2.%'
+   </select>
+  
+</mapper>    

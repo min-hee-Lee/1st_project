@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 규칙을 넣으면 된다. -->
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/tiles/layout/baseLayout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="heading" value="" />
+		<put-attribute name="subheading" value="" />
+		<put-attribute name="header" value="/WEB-INF/tiles/common/header.jsp" />
+		<put-attribute name="content" value="" /> <!-- 레이아웃이 같으면 content에 계속 사용해도 된다. -->
+		<put-attribute name="footer" value="/WEB-INF/tiles/common/footer.jsp" />
+	</definition>
+
+
+	<!-- 메인 페이지 -->
+	<definition name="home" extends="baseLayout">
+		<put-attribute name="title" value="" />
+		<put-attribute name="heading" value="" />
+		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
+	</definition>
+
+
+
+
+	<!-- 리뷰 수정한 부분 -->
+	<definition name="review/list" extends="baseLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/review/list.jsp" />
+	</definition>
+
+
+
+
+	<!-- board/write을 요청하면 /WEB-INF/views/review/write.jsp가 응답을 한다. -->
+	<definition name="review/write" extends="baseLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/review/write.jsp" />
+	</definition>
+
+
+	<definition name="review/view" extends="baseLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/review/view.jsp" />
+	</definition>
+
+
+	<definition name="review/update" extends="baseLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/review/update.jsp" />
+	</definition>
+	<!-- 리뷰 끝 -->
+
+
+
+	<!-- 회원가입 메인 글씨 -->
+	<definition name="easyuserLayout" extends="baseLayout">
+		<put-attribute name="title" value="회원정보" />
+		<put-attribute name="heading" value="회원가입" />
+		<put-attribute name="subheading"
+			value="Welcome to MyMember" />
+	</definition>
+
+	<!-- 로그인 메인 글씨 -->
+	<definition name="easyuserLoginLayout" extends="baseLayout">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="heading" value="로그인" />
+		<put-attribute name="subheading"
+			value="Welcome to MyMember" />
+	</definition>
+
+	<!-- 회원정보수정 메인 글씨 -->
+	<definition name="easyuserEditLayout" extends="baseLayout">
+		<put-attribute name="title" value="회원정보" />
+		<put-attribute name="heading" value="회원정보 수정" />
+		<put-attribute name="subheading"
+			value="Welcome to MyMember" />
+	</definition>
+
+	<!--비밀번호변경 메인 글씨 -->
+	<definition name="easyuserEditPassLayout"
+		extends="baseLayout">
+		<put-attribute name="title" value="회원정보" />
+		<put-attribute name="heading" value="비밀번호 변경" />
+		<put-attribute name="subheading"
+			value="Welcome to MyMember" />
+	</definition>
+
+	<!-- 회원가입 -->
+	<definition name="easyuser/signup" extends="easyuserLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/easyuser/signup.jsp" />
+	</definition>
+
+	<!-- 로그인 -->
+	<definition name="easyuser/login"
+		extends="easyuserLoginLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/easyuser/login.jsp" />
+	</definition>
+
+	<!-- 회원정보 수정폼3 -->
+	<definition name="easyuser/editmember"
+		extends="easyuserEditLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/easyuser/editmember.jsp" />
+	</definition>
+
+	<!-- 비밀번호 변경폼2 -->
+	<definition name="easyuser/changepass"
+		extends="easyuserEditPassLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/easyuser/changepass.jsp" />
+	</definition>
+
+
+
+	<!-- 공지사항 타일즈 추가 -->
+	<!-- 공지사항 관리자 페이지 리스트 -->
+	<definition name="noti/list" extends="baseLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/noti/list.jsp" />
+	</definition>
+
+	<!-- 공지사항 이용자 페이지 리스트 -->
+	<definition name="noti/user" extends="baseLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/noti/user.jsp" />
+	</definition>
+
+
+	<!-- 공지사항 세부 페이지 -->
+	<definition name="noti/show" extends="baseLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/noti/show.jsp" />
+	</definition>
+
+
+	<!-- 공지사항 등록 -->
+	<definition name="noti/insert" extends="baseLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/noti/insert.jsp" />
+	</definition>
+	
+	<!-- 공지사항 수정 -->
+	<definition name="noti/update" extends="baseLayout">
+		<put-attribute name="content"
+			value="/WEB-INF/views/noti/update.jsp" />
+	</definition>
+
+
+
+</tiles-definitions>
+

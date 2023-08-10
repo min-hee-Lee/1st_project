@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<!--ReviewDaoImp 빈 선언 -->
+	<bean id="reviewDao" class="review.dao.ReviewDaoImp">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	
+	<!-- ReviewServiceImp 빈 선언 -->
+	<bean id="reviewService" class="review.service.ReviewServiceImp">
+		<property name="reviewDao" ref="reviewDao" />
+	</bean>
+<bean id="informationDao" class="information.dao.InformationDaoImp">
+     <property name="sqlSession" ref="sqlSession" />     
+     
+  </bean>
+ 
+  <!-- Spring JDBC나 Mybatis를 이용해서 DB연동을 처리하는 경우
+	     DataSourceTransactionManager이 트랜잭션 관리자로 사용된다. -->
+	<!-- [4] TransactionManager 빈 선언 -->
+	<!-- <bean id="transactionManager"
+	    class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="dataSource" />    
+	</bean> -->
+ 
+
+
+  
+  <!-- Service -->
+  <bean id="informationService" class="information.service.InformationServiceImp">
+    <property name="informationDao" ref="informationDao" />
+  </bean>
+
+
+	<!-- ReviewController 빈 선언 -->
+	<bean class="review.controller.ReviewController">
+		<property name="reviewService" ref="reviewService" />
+		<property name="informationService" ref="informationService" />
+	</bean>
+	
+	<!-- 다운로드 뷰 선언 -->
+	<bean id="download" class="review.view.ReviewDownLoadView">
+		<property name="reviewDao" ref="reviewDao"/>
+	</bean>
+	
+	
+	
+	
+	
+
+</beans>

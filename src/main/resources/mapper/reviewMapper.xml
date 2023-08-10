@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ 
+<!-- 매퍼 아이디는 DAO이름이랑 같게 해야한다. -->
+<!-- 페이징 작업을 위해 데이터 총 갯수를 받아온다. -->
+<mapper namespace="review">
+	<select id="reviewCount" resultType="int">
+		SELECT count(*) FROM review
+	</select>
+
+
+	<!-- 코드 합치면서 해야할 듯 -->
+	<!-- easyuser로 바꿔야 함. 일단 테스트 데이터로 찍어보면 나오기는 함 -->
+	<resultMap type="review.dto.ReviewDTO" id="listSelect" autoMapping="true" >
+	    
+		<association property="easyusersDTO" javaType="easyusers.dto.EasyusersDTO"  >
+			<result column="easyuser_name" property="easyuser_name" />
+		</association>  
+	</resultMap>
+
+
+
+
+	<!-- 리스트가 나오는거 보여주는거 같은데 -->
+	<!-- 사용자 이름은 나오는데 다른 데이터는 출력이 안됨. 어째서? -->
+	<!-- 데이터 출력 됨. DTO 변수명이랑 오라클 변수명이랑 같아야 한다. -->
+	<!-- 해결 됨 -->
+	<select id="reviewList" parameterType="review.dto.PageDTO" resultMap="listSelect">
+	<![CDATA[ 
+		SELECT b.*
+		FROM(SELECT rownum AS rm, a.*
+			FROM(SELECT r.*, m.easyuser_name
+			FROM review r, easyuser m
+			WHERE r.email=m.email(+)
+			ORDER BY num DESC, write_date ASC)a)b
+			WHERE b.rm>=#{startRow} AND b.rm<=#{endRow}
+		]]>
+	</select> 
+	
+
+
+
+	<insert id="reviewSave" parameterType="review.dto.ReviewDTO">
+		INSERT INTO review(num, email,info_title,review_title, review_content,write_date,review_count,route_name)
+		VALUES (review_seq.nextval, #{email, jdbcType=VARCHAR}, #{info_title, jdbcType=VARCHAR}, #{review_title, jdbcType=VARCHAR}, #{review_content, jdbcType=VARCHAR}, sysdate, 0, #{route_name, jdbcType=VARCHAR})	 
+	</insert>
+	
+	
+	
+	<!-- 조회수 증가 -->
+	<update id="reviewReadCount" parameterType="int">
+		UPDATE review
+		SET review_count = review_count + 1
+		WHERE num=#{num}
+	</update>
+	
+	
+	<resultMap type="review.dto.ReviewDTO" id="contentSelect" autoMapping="true">
+		<!-- 아래의 쿼리문의 결과값을 여기서 처리한다.-->
+										<!-- jdbc 타입은 오라클을 의미 -->
+		<association property="easyusersDTO" javaType="easyusers.dto.EasyusersDTO" >
+			<result column="easyuser_name" property="easyuser_name"/>
+		</association>
+	
+	</resultMap>
+	
+	
+	<select id="reviewContent" parameterType="int" resultMap="contentSelect">
+	<!-- 합병하고 멤버 변수 이름 수정해야 함 -->
+	<!-- 이메일이 중복되는 경우, 중복 되어서 처리가 된다. -->
+		SELECT b.*, m.easyuser_name
+		FROM review b, easyuser m
+		WHERE b.email = m.email(+)
+        and num = #{num}
+	</select>
+	
+	
+	<update id="reviewUpdate" parameterType="review.dto.ReviewDTO">
+		UPDATE review
+		SET review_title = #{review_title}, review_content=#{review_content} 
+		<!-- null이 아니면 수정할 컨텐츠가 있다는 뜻 -->
+		<if test="route_name!=null">
+		,route_name=#{route_name}
+		</if>
+		WHERE num=#{num}
+	</update>
+	
+	<select id="reviewGetFile" parameterType="int" resultType="string">
+		SELECT route_name
+		FROM review
+		WHERE num=#{num}
+	</select>
+
+	<!-- 리뷰 삭제 기능 구현 완료 -->
+	<delete id="reviewDelete" parameterType="int">
+		DELETE FROM review
+		WHERE num=#{num}
+	</delete>
+
+
+   
+
+
+</mapper>

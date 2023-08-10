@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+<!--  [4] MemDaoImp 빈 선언 -->
+   <bean id = "noticeDao" class="dao.NoticeDaoImp">
+   <property name="sqlSession" ref="sqlSession" />
+   </bean>
+
+
+
+
+<!-- [5] Controller 빈 선언 --><!-- 변경함 -->
+   <bean class="controller.NoticeController">
+   
+    <property name="noticeDao" ref="noticeDao" />
+   </bean>
+   
+   
+
+
+
+</beans>
+	

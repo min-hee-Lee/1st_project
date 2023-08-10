@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="noti">
+	<select id ="all" resultType="model.NoticeDTO">
+	SELECT * FROM notice
+	ORDER BY num DESC
+	</select>
+
+	<insert id ="ins" parameterType="model.NoticeDTO">
+	INSERT INTO notice(num,email,notice_title,notice_content,write_date)
+	VALUES (notice_seq.nextval, 'admin@email', #{notice_title, jdbcType=VARCHAR}, 
+	        #{notice_content, jdbcType=VARCHAR}, sysdate)
+	
+	</insert>
+	
+	<select id="one" parameterType="int" resultType="model.NoticeDTO">
+	SELECT * FROM notice
+	WHERE num = #{num}
+	</select>
+	
+	<update id="upt" parameterType="model.NoticeDTO">
+	UPDATE notice SET  notice_title = #{notice_title}, notice_content=#{notice_content},  write_date=sysdate 
+	WHERE num = #{num}
+	</update> 
+	
+	<delete id="del" parameterType="int">
+	DELETE FROM notice
+	WHERE num = #{num}
+	</delete>
+	
+	<select id="count" resultType="int">
+      SELECT count(*) FROM notice
+	</select> 
+	
+	
+	<select id="list" parameterType="model.PageDTO" resultType="model.NoticeDTO">
+         <![CDATA[
+         SELECT b.*
+         FROM(SELECT rownum AS rm, a.*
+            FROM(SELECT b.*
+                FROM notice b
+                ORDER BY num DESC)a)b
+          WHERE b.rm>=#{startRow} AND b.rm<=#{endRow}
+          ]]>
+    </select> 
+    
+      <update id="notice_count" parameterType="int">
+      UPDATE notice
+      SET notice_Count = notice_Count + 1
+      WHERE num=#{num}
+      </update>
+    
+	
+</mapper>    

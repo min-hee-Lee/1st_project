@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="easyuser">
+
+<!-- 회원가입 -->
+
+	<insert id="insertEasyuser" parameterType="easyusers.dto.EasyusersDTO">
+		<![CDATA[
+			INSERT INTO easyuser(email, easyuser_pass, easyuser_name, nick_name, phone_num, sex, birth, easyuser_type, easyuser_num)
+			VALUES(#{email}, #{easyuser_pass}, #{easyuser_name}, #{nick_name}, #{phone_num}, #{sex}, #{birth}, #{easyuser_type}, #{easyuser_num})
+		]]>
+	</insert>
+
+	
+<!-- 닉네임 중복확인 -->
+	<select id="checkDuplicateNickname" parameterType="string" resultType="int">
+	    SELECT COUNT(*) FROM easyuser 
+	    WHERE nick_name = #{nick_name}
+	</select>
+	
+	
+<!-- 로그인(해당 이메일에 포함된 데이터를 가져오는 쿼리문 -->
+	<select id="selectByEmail" parameterType="string" resultType="easyusers.dto.EasyusersDTO">
+		SELECT * FROM easyuser
+		WHERE email =#{email}
+	</select>
+	
+
+<!-- 회원정보 수정 -->
+	<update id="updateEasyuser" parameterType="easyusers.dto.EasyusersDTO">
+		UPDATE easyuser
+		SET easyuser_pass=#{easyuser_pass}, easyuser_name=#{easyuser_name}, nick_name=#{nick_name}, phone_num=#{phone_num}
+		WHERE email=#{email}
+	</update>
+
+
+<!-- 비밀번호 변경 -->
+	<update id="updateByPass" parameterType="easyusers.dto.EasyusersDTO">
+		UPDATE easyuser SET easyuser_pass=#{easyuser_pass}
+		WHERE email=#{email}
+	</update>
+
+</mapper>
+
+
+
+
+

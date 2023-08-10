@@ -1,0 +1,15 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding:0;
+}
+
+bodywrap * {
+  outline: 2px dashed salmon;
+} 
+
+
+review_img *{
+	height = 500px;
+	weight = 300px;
+}

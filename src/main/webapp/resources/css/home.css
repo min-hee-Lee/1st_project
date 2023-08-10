@@ -1,0 +1,202 @@
+@charset "UTF-8";
+*{
+   margin: 0;
+   padding:0;
+}
+
+/*  body * {
+  outline: 2px dashed salmon;
+}    
+ */
+ 
+ 
+/*--------좌우슬라이딩---------*/
+.content0_area{
+    width: 1300px;
+    height: 800px;
+    margin: 0 auto;
+}
+
+
+#slide1{
+    height: 800px;
+    overflow: hidden;
+}
+#slide1>ul{
+    width: 3900px;
+    font-size: 0;
+}
+#slide1>ul>li{
+    display: inline-block;
+    font-size: 0;
+}
+
+
+/* 고르기 영역 */
+.content1_area{
+   width: 100%;
+   height: 400px;
+  /*  background-color: #7696fd;  */
+  /*  background-color: transparent; */
+   /* 글자설정 */
+   display:  inline-block;
+   align-items: center;
+ 
+}
+
+.iam{
+   display: inline-block;
+   margin-top: 200px;
+   margin-left : 150px;
+    font-size: 60px;
+    /* font-weight: bold; */
+    line-height: 50px;
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+#info_type{
+    display : flex;
+    margin-top: -60px;
+     margin-left: 350px;
+     width: 300px;
+     height: 60px;
+     color: black;
+     font-size: 50px;
+     /* font-weight: bold; */
+     font-family: 'Do Hyeon', sans-serif;
+}
+
+#info_theme{
+    position: relative;
+    display : flex;
+    margin-top: -60px;
+     margin-left: 730px;
+     width: 400px;
+     height: 60px;
+     color: black;
+     font-size: 50px;
+     /* font-weight: bold; */
+     font-family: 'Do Hyeon', sans-serif;
+}
+
+
+.want{
+  position:relative;
+  display : block;
+  margin-top: 50px;
+  margin-left: 300px;
+  font-size: 60px;
+  /* font-weight: bold; */
+  line-height: 50px;
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+
+.btn_reload{
+   font-size: 30px;
+   /* font-weight: bold; */
+   line-height: 5px;
+   text-decoration: none; /* 링크 밑줄 제거 */
+   border-radius: 80px;
+   width: 220px;
+   height: 90px;
+   background-color: white;
+   margin-top : 100px; 
+   margin-left : 300px;
+   cursor: pointer; /* 마우스 커서 모양 변경 */
+   font-family: 'Do Hyeon', sans-serif;
+}
+
+.btn_black{
+   display: flex;
+   position: inline-block;
+   font-size: 30px;
+   /* font-weight: bold; */
+   line-height: 5px;
+   text-decoration: none; /* 링크 밑줄 제거 */
+   border-radius: 80px;
+   width: 250px;
+   height: 90px;
+   color: black;
+   background-color: #e3f2fd;
+   text-align : center;
+   margin-top : -90px; 
+   margin-left : 700px;
+   cursor: pointer; /* 마우스 커서 모양 변경 */
+   font-family: 'Do Hyeon', sans-serif;
+}
+
+/* 여행지 목록 영역  */
+.content2_area{
+   width: 100%;
+ /*   background-color: #97ef97; */
+   height: 1000px;
+     /* 글자설정 */
+   font-size: 30px;
+   font-weight: bold;
+   line-height: 50px;
+
+}
+
+.gallery_scroll{
+   pisition: absolute;
+   width: 1000px;
+   height: 800px;
+   margin-left : 150px;
+   overflow: hidden;
+   /* border:1px solid blue; */
+}
+
+.gallery_teel {
+  display: flex;
+  text-align: center;
+  float: left;
+  width: 1000px;
+  transition: transform 0.5s;
+  margin-top : 200px;
+}
+
+.gallery_item {
+  font-size: 20px;
+  text-align: center;
+  margin-right : 50px;
+  scroll-snap-align: center; 
+  cursor: pointer;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+
+.slide_btn button:hover {
+   cursor: pointer;
+    background: white;
+}
+
+
+
+.slide_btn .prev {
+   display: relative;
+   background-color: transparent;
+   font-size: 50px;
+   width: 80px;
+   height : 80px;
+   float: left;
+   margin-left: 40px;
+   margin-top: 480px;
+   border : 0px;
+}
+.slide_btn .next {
+   background-color: transparent;
+   font-size: 50px;
+   width: 80px;
+   height : 80px;
+    float: left;
+   margin-left: 1180px;
+   margin-top: -320px;
+   border : 0px;
+}
+
+
+/* float 속성 해제 */
+.clearfix{
+   clear: both;
+}
